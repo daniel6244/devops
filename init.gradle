@@ -1,0 +1,21 @@
+rootProject {
+    apply plugin: 'maven'
+
+    repositories {
+        /*
+        maven{
+           url "http://nexus3:8081/repository/maven-public/"
+        }
+        */
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: version.endsWith('SNAPSHOT') ? "http://nexus3:8081/repository/maven-snapshots/" :"http://localhost:8081/repository/maven-releases/") {
+                    authentication(userName: "admin", password: "admin123")
+                }
+            }
+        }
+    }
+}
